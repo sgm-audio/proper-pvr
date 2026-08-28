@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { Appearance, ColorSchemeName } from 'react-native';
+import { Appearance } from 'react-native';
 
 interface ThemeContextType {
   isDark: boolean;
