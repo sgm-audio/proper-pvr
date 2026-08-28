@@ -25,7 +25,7 @@ interface StorageContextType {
   markAsWatched: (recordingId: string, progress: number) => void;
   addToViewingHistory: (program: Program, progress: number, deviceId: string) => void;
   syncData: () => Promise<void>;
-  clearAllData: () => void;
+  clearAllData: () => Promise<void>;
 }
 
 const StorageContext = createContext<StorageContextType | undefined>(undefined);
