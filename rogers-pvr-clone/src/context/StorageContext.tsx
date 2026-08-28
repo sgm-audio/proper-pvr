@@ -238,8 +238,20 @@ export function StorageProvider({ children }: { children: ReactNode }) {
     saveData('recordings', newRecordings);
   };
 
-  const cancelRecording = (recordingId: string) => {
-    const newRecordings = recordings.filter(r => r.id !== recordingId);
+  const cancelRecording = (id: string) => {
+    const schedule = recordingSchedules.find(s => s.id === id);
+
+    if (schedule) {
+      const newSchedules = recordingSchedules.filter(s => s.id !== id);
+      const newRecordings = recordings.filter(r => !(r.programId === schedule.programId && r.status === 'scheduled'));
+      setRecordingSchedules(newSchedules);
+      setRecordings(newRecordings);
+      saveData('recordingSchedules', newSchedules);
+      saveData('recordings', newRecordings);
+      return;
+    }
+
+    const newRecordings = recordings.filter(r => r.id !== id);
     setRecordings(newRecordings);
     saveData('recordings', newRecordings);
 
