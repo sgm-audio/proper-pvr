@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Home, Tv, Search, Download, Settings, Play, Pause, Square, Info, Menu, ChevronLeft, Volume2, Mic } from 'lucide-react-native';
+import { Home, Tv, Search, Download, Settings, Play, Pause, Square, Info, Menu, ChevronLeft, Mic } from 'lucide-react-native';
 import { useTheme } from '../context/ThemeContext';
 
 interface TabBarIconProps {

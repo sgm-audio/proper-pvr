@@ -17,6 +17,7 @@ export default function PlayerScreen() {
   const { markAsWatched, addToViewingHistory } = useStorage();
   
   const videoRef = useRef<Video>(null);
+  const lastHistoryUpdateRef = useRef<number>(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [showControls, setShowControls] = useState(true);
@@ -95,13 +96,17 @@ export default function PlayerScreen() {
             const durationMillis = status.durationMillis || 1;
             setDuration(durationMillis / 1000);
             
-            // Update viewing history
+            // Update viewing history (throttled to once every 10 seconds)
             if (status.positionMillis > 0) {
-              const progressPercent = (status.positionMillis / durationMillis) * 100;
-              if (recording) {
-                markAsWatched(recording.id, progressPercent);
+              const now = Date.now();
+              if (now - lastHistoryUpdateRef.current >= 10000) {
+                lastHistoryUpdateRef.current = now;
+                const progressPercent = (status.positionMillis / durationMillis) * 100;
+                if (recording) {
+                  markAsWatched(recording.id, progressPercent);
+                }
+                addToViewingHistory(content, progressPercent, 'mobile-1');
               }
-              addToViewingHistory(content, progressPercent, 'mobile-1');
             }
           }
           

@@ -43,8 +43,8 @@ export default function GuideScreen({ onProgramSelect }: GuideGridProps) {
   const getProgramsForChannel = (channelId: string) => {
     return programs.filter(p => 
       p.channelId === channelId &&
-      p.startTime >= timeSlots[0] &&
-      p.endTime <= timeSlots[timeSlots.length - 1]
+      p.startTime < timeSlots[timeSlots.length - 1] &&
+      p.endTime > timeSlots[0]
     );
   };
 

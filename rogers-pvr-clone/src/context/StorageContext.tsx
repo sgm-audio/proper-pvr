@@ -242,6 +242,12 @@ export function StorageProvider({ children }: { children: ReactNode }) {
     const newRecordings = recordings.filter(r => r.id !== recordingId);
     setRecordings(newRecordings);
     saveData('recordings', newRecordings);
+
+    const newSchedules = recordingSchedules.filter(s => s.id !== recordingId);
+    if (newSchedules.length !== recordingSchedules.length) {
+      setRecordingSchedules(newSchedules);
+      saveData('recordingSchedules', newSchedules);
+    }
   };
 
   const deleteRecording = (recordingId: string) => {
@@ -261,8 +267,9 @@ export function StorageProvider({ children }: { children: ReactNode }) {
   };
 
   const addToViewingHistory = (program: Program, progress: number, deviceId: string) => {
+    const existingIndex = viewingHistory.findIndex(h => h.programId === program.id);
     const historyItem = {
-      id: `history-${Date.now()}`,
+      id: existingIndex >= 0 ? viewingHistory[existingIndex].id : `history-${Date.now()}`,
       programId: program.id,
       program,
       watchedAt: new Date(),
@@ -271,7 +278,12 @@ export function StorageProvider({ children }: { children: ReactNode }) {
       completed: progress >= 90,
     };
 
-    const newHistory = [historyItem, ...viewingHistory].slice(0, 100); // Keep last 100 items
+    let newHistory: any[];
+    if (existingIndex >= 0) {
+      newHistory = [historyItem, ...viewingHistory.filter((_, i) => i !== existingIndex)];
+    } else {
+      newHistory = [historyItem, ...viewingHistory].slice(0, 100); // Keep last 100 items
+    }
     setViewingHistory(newHistory);
     saveData('viewingHistory', newHistory);
   };
@@ -295,7 +307,7 @@ export function StorageProvider({ children }: { children: ReactNode }) {
       await AsyncStorage.removeItem('userProfile');
       await AsyncStorage.removeItem('viewingHistory');
       // Reload with defaults
-      loadData();
+      await loadData();
     } catch (error) {
       console.error('Error clearing data:', error);
     }
