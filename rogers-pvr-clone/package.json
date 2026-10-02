@@ -5,7 +5,7 @@
   "dependencies": {
     "@react-native-async-storage/async-storage": "^3.1.1",
     "@react-navigation/bottom-tabs": "^7.18.17",
-    "@react-navigation/native": "^7.3.17",
+    "@react-navigation/native": "^7.4.1",
     "@react-navigation/stack": "^7.10.23",
     "clsx": "^2.1.1",
     "date-fns": "^4.4.0",
@@ -31,6 +31,9 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web"
+  },
+  "overrides": {
+    "uuid": "^11.1.1"
   },
   "private": true
 }
