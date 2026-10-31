@@ -2,37 +2,18 @@
 
 A React Native mobile application that replicates the Rogers Cable (formerly Shaw Cable) PVR interface for digital cable channels. Built with Expo for cross-platform iOS and Android support.
 
-## Features
+## What's actually in here
 
-### 📺 Core Functionality
-- **Interactive TV Guide Grid** - Browse channels and programs with a familiar cable-style guide
-- **Live TV Playback** - Stream live content with full playback controls
-- **PVR Recording System** - Schedule one-time or recurring recordings
-- **Recording Management** - View, play, and manage recorded content
-- **Offline Playback** - Watch downloaded recordings without internet
+It's a UI prototype running on mock data from `src/context/StorageContext.tsx`. There's no real cable, IPTV or media-server source connected yet.
 
-### 🔍 Search & Discovery
-- **Voice Search** - Hands-free program search using speech recognition
-- **Text Search** - Search by title, genre, channel, or description
-- **Category Filtering** - Filter content by genre (Sports, Movies, News, Kids, etc.)
-- **Quick Channel Access** - Fast access to favorite channels
+- Guide grid, home, search, recordings, settings and player screens
+- The player uses `expo-av` with a placeholder stream URL
+- Recordings can be scheduled and listed, but only as local records. Nothing is captured
+- Search by title, genre, channel or description, with category filters
+- "Voice search" only speaks through `expo-speech` (text-to-speech). There's no speech recognition yet
+- Dark theme
 
-### 🎨 User Experience
-- **Dark Mode Interface** - Easy on the eyes with Rogers-inspired dark theme
-- **Responsive Design** - Optimized for both phones and tablets
-- **Remote Control Navigation** - Designed for seamless remote control integration
-- **Smooth Animations** - Hardware-accelerated transitions
-
-### 👤 Personalization
-- **Multi-Device Sync** - Sync viewing history across all devices
-- **User Profiles** - Support for multiple user profiles
-- **Parental Controls** - Content restrictions by rating
-- **Viewing History** - Track watched programs and resume playback
-
-### 🔌 Extensible Architecture
-- **Multiple Source Providers** - Integrate IPTV, Plex, Emby, Jellyfin, or custom sources
-- **Plugin System** - Easy to add new streaming sources
-- **API Ready** - Structured for backend integration
+These are typed in `src/types` with settings toggles, but not built yet: offline playback, live rewind, multi-device sync, user profiles, parental controls, and Plex/Emby/Jellyfin/IPTV sources.
 
 ## Project Structure
 
@@ -169,7 +150,7 @@ The app uses mock data by default. To integrate with real services:
 - Recording schedule sync
 - Conflict resolution
 
-## Future Enhancements
+## Planned
 
 - [ ] Real backend API integration
 - [ ] Live pause and rewind (DVR functionality)
